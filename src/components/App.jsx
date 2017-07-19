@@ -5,6 +5,11 @@ class App extends React.Component {
       currentVideo: props.videos[0],
       videoList: props.videos
     };
+    this.setCurrentVideo = this.setCurrentVideo.bind(this);
+  }
+
+  setCurrentVideo(video) {
+    console.log(video);
   }
 
   render() {
@@ -20,7 +25,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoList}/>
+            <VideoList videos={this.state.videoList} selectVideoCallback={this.setCurrentVideo}/>
           </div>
         </div>
       </div>
