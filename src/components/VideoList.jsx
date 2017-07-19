@@ -1,7 +1,7 @@
 var VideoList = (props) => {
   var videoComponentList = [];
   for (var i = 0; i < props.videos.length; i++) {
-    videoComponentList.push(<VideoListEntry video={props.videos[i]}/>);
+    videoComponentList.push(<VideoListEntry video={props.videos[i]} key={i} />);
   }
 
   return (
