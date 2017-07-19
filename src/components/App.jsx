@@ -3,12 +3,11 @@ var App = (props) => (
     <nav className="navbar">
       <div className="col-md-6 offset-md-3">
         <Search />
-        {console.log(props.videos)}
       </div>
     </nav>
     <div className="row">
       <div className="col-md-7">
-        <VideoPlayer />
+        <VideoPlayer video={props.videos[0]}/>
       </div>
       <div className="col-md-5">
         <VideoList videos={props.videos}/>
