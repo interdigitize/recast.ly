@@ -2,31 +2,36 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentVideo: props.videos[0],
-      videoList: props.videos
+      videoList: [],
+      currentVideo: null
     };
     this.setCurrentVideo = this.setCurrentVideo.bind(this);
     this.search = this.search.bind(this);
+  }
+
+  componentDidMount() {
+    this.search();
   }
 
   setCurrentVideo(video) {
     this.setState({currentVideo: video});
   }
 
-  search(query) {
+  search(query = 'asdf') {
     var options = {
-      key: window.YOUTUBE_API_KEY,
+      key: this.props.API_KEY,
       maxResults: 5,
       query: query
     };
 
-    window.searchYouTube(options, (data) => {
+    this.props.searchYouTube(options, (videos) => {
       this.setState({
-        videoList: data,
-        currentVideo: data[0]
+        videoList: videos,
+        currentVideo: videos[0]
       });
     });
   }
+
 
   render() {
     return (
@@ -38,7 +43,7 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}/>
+            {this.state.videoList.length === 0 ? <h1>Loading</h1> : <VideoPlayer video={this.state.currentVideo}/>}
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.videoList} selectVideoCallback={this.setCurrentVideo}/>
