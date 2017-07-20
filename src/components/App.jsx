@@ -6,10 +6,26 @@ class App extends React.Component {
       videoList: props.videos
     };
     this.setCurrentVideo = this.setCurrentVideo.bind(this);
+    this.search = this.search.bind(this);
   }
 
   setCurrentVideo(video) {
     this.setState({currentVideo: video});
+  }
+
+  search(query) {
+    var options = {
+      key: window.YOUTUBE_API_KEY,
+      maxResults: 5,
+      query: query
+    };
+
+    window.searchYouTube(options, (data) => {
+      this.setState({
+        videoList: data,
+        currentVideo: data[0]
+      });
+    });
   }
 
   render() {
@@ -17,7 +33,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search callback={this.search}/>
           </div>
         </nav>
         <div className="row">
