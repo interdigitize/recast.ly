@@ -1,7 +1,11 @@
 var VideoList = (props) => {
   var videoComponentList = [];
   for (var i = 0; i < props.videos.length; i++) {
-    videoComponentList.push(<VideoListEntry video={props.videos[i]} selectVideoCallback={props.selectVideoCallback} key={i} />);
+    var video = props.videos[i];
+    var callback = () => {
+      props.selectVideoCallback(video);
+    };
+    videoComponentList.push(<VideoListEntry video={props.videos[i]} callback={callback} key={i} />);
   }
 
   return (
