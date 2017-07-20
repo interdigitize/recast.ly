@@ -9,7 +9,7 @@ class App extends React.Component {
   }
 
   setCurrentVideo(video) {
-    console.log(video);
+    this.setState({currentVideo: video});
   }
 
   render() {
