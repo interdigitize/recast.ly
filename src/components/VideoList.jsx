@@ -1,16 +1,7 @@
 var VideoList = (props) => {
-  var videoComponentList = [];
-  for (var i = 0; i < props.videos.length; i++) {
-    var video = props.videos[i];
-    // var callback = () => {
-    //   props.selectVideoCallback(video);
-    // };
-    videoComponentList.push(<VideoListEntry video={props.videos[i]} callback={props.selectVideoCallback} key={i} />);
-  }
-
   return (
     <div className="video-list">
-      {videoComponentList}
+      {props.videos.map((video, index) => { return <VideoListEntry video={video} callback={props.selectVideoCallback} key={index} />; })}
     </div>
   );
 };
