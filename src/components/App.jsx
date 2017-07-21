@@ -4,14 +4,27 @@ class App extends React.Component {
     this.state = {
       videoList: [],
       currentVideo: null,
-      comments: []
+      comments: [],
+      chatterboxMessages: []
     };
     this.setCurrentVideo = this.setCurrentVideo.bind(this);
     this.search = this.search.bind(this);
+    this.updateChatterBox = this.updateChatterBox.bind(this);
+
+    this.updateChatterBox();
+    setInterval(this.updateChatterBox, 5000);
   }
 
   componentDidMount() {
     this.search();
+  }
+
+  updateChatterBox() {
+    window.getFromChatterBox((messages) => {
+      this.setState({
+        chatterboxMessages: messages.results
+      });
+    });
   }
 
   setCurrentVideo(video) {
@@ -66,6 +79,7 @@ class App extends React.Component {
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.videoList} selectVideoCallback={this.setCurrentVideo}/>
+            <ChatterBox messages={this.state.chatterboxMessages} />
           </div>
         </div>
       </div>

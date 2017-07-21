@@ -41,7 +41,7 @@ body {
   margin-left: 20px;
 }
 
-.comment-list {
+.comment-list, .chatterbox-client {
   margin-top: 10px;
 }
 
@@ -59,6 +59,10 @@ body {
   font-size: 0.85em;
 }
 
+.comment .publishedAt, .likeCount {
+  font-size: 0.75em;
+}
+
 .video-player-details {
   background: #fff;
   padding: 8px;
@@ -67,7 +71,7 @@ body {
   margin-top: 10px;
 }
 
-.video-list, .comment-list {
+.video-list, .comment-list, .chatterbox-client {
   background: #fff;
   padding: 8px;
   border: 0;
