@@ -3,7 +3,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       videoList: [],
-      currentVideo: null
+      currentVideo: null,
+      comments: []
     };
     this.setCurrentVideo = this.setCurrentVideo.bind(this);
     this.search = this.search.bind(this);
@@ -15,6 +16,7 @@ class App extends React.Component {
 
   setCurrentVideo(video) {
     this.setState({currentVideo: video});
+    this.getComments();
   }
 
   search(query = 'asdf') {
@@ -29,9 +31,23 @@ class App extends React.Component {
         videoList: videos,
         currentVideo: videos[0]
       });
+      this.getComments();
     });
   }
 
+  getComments() {
+    var options = {
+      key: this.props.API_KEY,
+      max: 10,
+      videoId: this.state.currentVideo.id.videoId
+    };
+
+    window.getComments(options, (comments) => {
+      this.setState({
+        comments: comments
+      });
+    });
+  }
 
   render() {
     return (
@@ -43,7 +59,8 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            {this.state.videoList.length === 0 ? <h1>Loading</h1> : <VideoPlayer video={this.state.currentVideo}/>}
+            {this.state.videoList.length === 0 ? <h1>Loading Video...</h1> : <VideoPlayer video={this.state.currentVideo}/>}
+            {this.state.comments.length === 0 ? <h1>Loading Comments...</h1> : <CommentList comments={this.state.comments}/>}
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.videoList} selectVideoCallback={this.setCurrentVideo}/>
