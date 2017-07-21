@@ -27,11 +27,13 @@ class App extends React.Component {
     };
 
     this.props.searchYouTube(options, (videos) => {
-      this.setState({
-        videoList: videos,
-        currentVideo: videos[0]
-      });
-      this.getComments();
+      if(videos.length > 0) {
+        this.setState({
+          videoList: videos,
+          currentVideo: videos[0]
+        });
+        this.getComments();
+      }
     });
   }
 
