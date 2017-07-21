@@ -27,7 +27,7 @@ class App extends React.Component {
     };
 
     this.props.searchYouTube(options, (videos) => {
-      if(videos.length > 0) {
+      if (videos.length > 0) {
         this.setState({
           videoList: videos,
           currentVideo: videos[0]
